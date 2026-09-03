@@ -7,7 +7,7 @@ import dogImg from "@/assets/model-dog.jpg";
 
 const TITLE = "KitConnect — Bilingual LEGO WeDo 2.0 Build Guides for Kids";
 const DESCRIPTION =
-  "KitConnect gives kids ages 6-10 bilingual, offline step-by-step LEGO Education WeDo 2.0 build guides, plus an AI instructor constrained to real parts.";
+  "KitConnect gives children ages 6-10 bilingual, offline step-by-step LEGO Education WeDo 2.0 build guides, with an AI instructor constrained to real kit parts.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,273 +24,267 @@ export const Route = createFileRoute("/")({
 });
 
 const models = [
-  { name: "Milo the Rover", meta: "29 steps · science", img: miloImg, tint: "bg-leaf/15" },
-  { name: "Frog", meta: "18 steps · animals", img: frogImg, tint: "bg-leaf/15" },
-  { name: "Race Car", meta: "24 steps · vehicles", img: racecarImg, tint: "bg-coral/15" },
-  { name: "Kiki the Dog", meta: "31 steps · pets", img: dogImg, tint: "bg-butter/20" },
+  { name: "Milo the Rover", meta: "29 steps · Science", img: miloImg },
+  { name: "Frog", meta: "18 steps · Animals", img: frogImg },
+  { name: "Race Car", meta: "24 steps · Vehicles", img: racecarImg },
+  { name: "Kiki the Dog", meta: "31 steps · Pets", img: dogImg },
+];
+
+const metrics = [
+  { value: "14", label: "Official WeDo 2.0 models" },
+  { value: "2", label: "Languages, fully translated" },
+  { value: "0", label: "Invented or unavailable parts" },
+  { value: "100%", label: "Of features work offline" },
 ];
 
 const guarantees = [
   {
-    title: "Real parts only",
-    body: "Every piece is checked against the WeDo 2.0 library by exact name and part number. Invented pieces are dropped before a child ever sees them.",
+    title: "Verified against the parts library",
+    body: "Every piece referenced in a generated build is matched to the WeDo 2.0 inventory by exact name and element number. Unmatched parts are rejected before rendering.",
   },
   {
-    title: "Quantities that match the box",
-    body: "Usage is tracked across the whole build and clamped, so a step never asks for more bricks than the kit actually holds.",
+    title: "Quantities bounded by the kit",
+    body: "Cumulative part usage is tracked across the full sequence and clamped to the physical contents of set 45300, so no step can request bricks a child does not have.",
   },
   {
-    title: "Connections that really work",
-    body: "Stud, friction pin, axle in a cross hole, gear mesh. Nothing floats, and anything that moves traces back to the motor.",
+    title: "Physically valid connections",
+    body: "Stud, friction pin, axle-in-cross-hole and gear mesh are modeled explicitly. Every sub-assembly is grounded, and moving elements trace back to the motor.",
   },
 ];
 
-const access = [
-  { title: "Installable app", body: "Caches the shell, kit manuals and narration audio so it keeps working with no signal." },
-  { title: "No reading required", body: "Big icons, huge touch targets and a warm voice that reads every step aloud." },
-  { title: "Shared devices", body: "Progress, saved builds and settings live on the device and survive going offline." },
-  { title: "English & Spanish", body: "Every caption, pin and narration line is translated, chosen right at the splash screen." },
+const capabilities = [
+  {
+    title: "Offline-first delivery",
+    body: "An installable progressive web app caches the interface, manuals and narration audio, so guided building continues without connectivity.",
+  },
+  {
+    title: "Pre-literate interface",
+    body: "Icon-led navigation, large touch targets and audio narration allow a six-year-old to progress through a build independently.",
+  },
+  {
+    title: "Shared-device support",
+    body: "Progress, saved builds and language preference persist locally, so a tablet used by several children retains each session.",
+  },
+  {
+    title: "English and Spanish",
+    body: "Captions, part labels, placement hints and narration are authored in both languages and selectable at launch.",
+  },
 ];
 
 function Index() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-cream font-body text-ink">
-      <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-blush/40 blur-2xl" />
-      <div className="pointer-events-none absolute -right-20 top-40 h-80 w-80 rounded-full bg-butter/40 blur-2xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-leaf/30 blur-2xl" />
-
-      <div className="relative mx-auto max-w-6xl px-5 py-6">
-        <header className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex gap-1" aria-hidden="true">
-              <span className="block h-7 w-7 rounded-md border-2 border-ink/10 bg-coral shadow-tile-sm" />
-              <span className="mt-2 block h-7 w-7 rounded-md border-2 border-ink/10 bg-butter shadow-tile-sm" />
-              <span className="block h-7 w-7 rounded-md border-2 border-ink/10 bg-leaf shadow-tile-sm" />
-            </div>
-            <div>
-              <p className="font-display text-2xl font-bold leading-none">KitConnect</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-ink/50">Build · Learn · Play</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-full border border-ink/10 bg-tile/70 p-1">
-              <span className="rounded-full bg-ink px-4 py-1.5 text-sm font-bold text-cream">EN</span>
-              <span className="rounded-full px-4 py-1.5 text-sm font-bold text-ink/50">ES</span>
-            </div>
-            <a
-              href="#models"
-              className="hidden items-center gap-2 rounded-full border border-ink/10 bg-sky px-4 py-2 text-sm font-extrabold text-ink shadow-tile-sm sm:flex"
-            >
-              See the builds
-            </a>
-          </div>
-        </header>
-
-        <section className="mt-8 grid gap-5 lg:grid-cols-12">
-          <div className="relative overflow-hidden rounded-[2rem] border border-ink/10 bg-tile p-7 shadow-tile lg:col-span-8">
-            <span className="absolute right-6 top-6 animate-float text-4xl" style={{ "--r": "12deg" } as React.CSSProperties}>
-              🧱
+    <div className="min-h-screen bg-cream font-body text-ink antialiased">
+      <header className="sticky top-0 z-20 border-b border-line bg-cream/85 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-md bg-ink font-display text-sm font-semibold text-cream">
+              K
             </span>
-            <p className="inline-block rounded-full bg-butter/60 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-ink">
+            <span className="font-display text-lg font-semibold tracking-tight">KitConnect</span>
+          </div>
+          <nav className="hidden items-center gap-8 text-sm font-medium text-slate md:flex">
+            <a href="#models" className="transition-colors hover:text-ink">Models</a>
+            <a href="#experience" className="transition-colors hover:text-ink">Experience</a>
+            <a href="#ai" className="transition-colors hover:text-ink">AI instructor</a>
+            <a href="#access" className="transition-colors hover:text-ink">Accessibility</a>
+          </nav>
+          <span className="rounded-md border border-line px-2.5 py-1 text-xs font-semibold tracking-wide text-slate">
+            EN / ES
+          </span>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-6xl px-6">
+        <section className="grid gap-14 border-b border-line py-20 lg:grid-cols-12 lg:py-28">
+          <div className="lg:col-span-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">
               Congressional App Challenge 2026
             </p>
-            <h1 className="mt-4 max-w-xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
-              Every kid deserves a guide that says{" "}
-              <span className="text-coral">exactly where the brick goes.</span>
+            <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl">
+              Guided STEM building for children who build on their own.
             </h1>
-            <p className="mt-4 max-w-lg text-lg text-ink/70">
-              KitConnect turns the LEGO Education WeDo 2.0 kit into bilingual, step-by-step build guides that work
-              offline — for children ages 6–10 building without a grown-up in the room.
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate">
+              KitConnect turns the LEGO Education WeDo 2.0 kit into bilingual, step-by-step build guides that run
+              entirely offline — designed for children ages 6 to 10 learning without an adult in the room.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-3">
               <a
                 href="#models"
-                className="inline-flex min-h-[56px] items-center rounded-2xl border border-ink/10 bg-coral px-7 font-display text-lg font-bold text-cream shadow-chunky transition-transform active:scale-[0.98]"
+                className="inline-flex h-11 items-center rounded-md bg-ink px-6 text-sm font-semibold text-cream transition-colors hover:bg-accent-blue"
               >
-                Explore the builds
+                View the build library
               </a>
               <a
                 href="#ai"
-                className="inline-flex min-h-[56px] items-center rounded-2xl border border-ink/10 bg-cream px-7 font-display text-lg font-bold text-ink transition-transform active:scale-[0.98]"
+                className="inline-flex h-11 items-center rounded-md border border-line bg-tile px-6 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
               >
-                ✨ How the AI works
+                How the AI is constrained
               </a>
             </div>
-            <div className="mt-7 flex items-center gap-4">
-              <div className="flex gap-1.5" aria-hidden="true">
-                <span className="h-2.5 w-2.5 rounded-full bg-coral" />
-                <span className="h-2.5 w-2.5 rounded-full bg-butter" />
-                <span className="h-2.5 w-2.5 rounded-full bg-leaf" />
-                <span className="h-2.5 w-2.5 rounded-full bg-sky" />
-                <span className="h-2.5 w-2.5 rounded-full bg-ink/20" />
-                <span className="h-2.5 w-2.5 rounded-full bg-ink/20" />
-              </div>
-              <p className="text-sm font-bold text-ink/60">One small step at a time · never a leap</p>
-            </div>
           </div>
-
-          <div className="flex flex-col rounded-[2rem] border border-ink/10 bg-tile p-6 shadow-tile lg:col-span-4">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-ink/50">By the numbers</p>
-            <div className="mt-4 flex items-center gap-5">
-              <div
-                className="relative grid h-24 w-24 place-items-center rounded-full"
-                style={{ background: "conic-gradient(var(--coral) 0 75%, color-mix(in oklab, var(--ink) 10%, transparent) 75% 100%)" }}
-              >
-                <div className="grid h-[86px] w-[86px] place-items-center rounded-full bg-tile text-center">
-                  <div>
-                    <p className="font-display text-3xl font-bold leading-none">14</p>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-ink/50">Kits</p>
-                  </div>
-                </div>
+          <div className="lg:col-span-5">
+            <div className="overflow-hidden rounded-lg border border-line bg-tile shadow-tile">
+              <img
+                src={miloImg}
+                alt="Milo the Rover assembled from LEGO Education WeDo 2.0 pieces"
+                width={768}
+                height={768}
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="border-t border-line px-5 py-4">
+                <p className="font-display text-sm font-semibold">Step 12 of 29 · Milo the Rover</p>
+                <p className="mt-1 text-sm text-slate">
+                  Attach the wheel rims to the axles on both sides of the frame.
+                </p>
               </div>
-              <div className="space-y-2">
-                <p className="font-display text-lg font-bold">2 languages</p>
-                <p className="font-display text-lg font-bold text-coral">0 invented parts</p>
-              </div>
-            </div>
-            <div className="mt-5 rounded-2xl border border-ink/10 bg-cream p-4">
-              <p className="text-xs font-extrabold uppercase tracking-wider text-ink/50">Who it's for</p>
-              <p className="mt-1 font-display text-lg font-bold leading-snug">
-                Kids on shared, low-bandwidth tablets 📶
-              </p>
-              <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink/10">
-                <div className="h-full w-full rounded-full bg-leaf" />
-              </div>
-              <p className="mt-2 text-sm font-semibold text-ink/60">100% of features work offline</p>
             </div>
           </div>
         </section>
 
-        <section id="models" className="mt-6 scroll-mt-6">
-          <div className="mb-4 flex items-end justify-between">
-            <h2 className="font-display text-2xl font-bold">Pick your model</h2>
-            <span className="text-sm font-bold text-ink/50">WeDo 2.0 · Set 45300</span>
+        <section className="grid gap-px border-b border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((m) => (
+            <div key={m.label} className="bg-cream px-1 py-10">
+              <p className="font-display text-4xl font-semibold tracking-tight">{m.value}</p>
+              <p className="mt-2 text-sm leading-snug text-slate">{m.label}</p>
+            </div>
+          ))}
+        </section>
+
+        <section id="models" className="scroll-mt-20 border-b border-line py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">Build library</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">
+                Authored from the official manuals
+              </h2>
+            </div>
+            <p className="text-sm text-slate">LEGO Education WeDo 2.0 · Set 45300</p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {models.map((m) => (
-              <article key={m.name} className="rounded-[1.6rem] border border-ink/10 bg-tile p-4 shadow-tile-sm">
-                <div className={`overflow-hidden rounded-xl ${m.tint}`}>
-                  <img
-                    src={m.img}
-                    alt={`${m.name} built from LEGO WeDo 2.0 pieces`}
-                    loading="lazy"
-                    width={768}
-                    height={768}
-                    className="aspect-square w-full object-cover"
-                  />
+              <article key={m.name} className="overflow-hidden rounded-lg border border-line bg-tile">
+                <img
+                  src={m.img}
+                  alt={`${m.name} built from LEGO WeDo 2.0 pieces`}
+                  loading="lazy"
+                  width={768}
+                  height={768}
+                  className="aspect-square w-full object-cover"
+                />
+                <div className="border-t border-line px-4 py-4">
+                  <h3 className="font-display text-base font-semibold">{m.name}</h3>
+                  <p className="mt-1 text-sm text-slate">{m.meta}</p>
                 </div>
-                <p className="mt-3 font-display text-lg font-bold leading-tight">{m.name}</p>
-                <p className="text-sm font-semibold text-ink/60">{m.meta}</p>
               </article>
             ))}
           </div>
-          <p className="mt-4 text-sm font-semibold text-ink/50">
-            Plus Flower, Helicopter, Hopper, Rhino, Grabber, Recycling Truck, Driving Base and more — every one authored
-            from the official manuals.
+          <p className="mt-8 max-w-2xl text-sm leading-relaxed text-slate">
+            Also includes Flower, Helicopter, Hopper, Rhino, Grabber, Recycling Truck and Driving Base — each sequence
+            transcribed from the official instructions and reviewed against the kit inventory.
           </p>
         </section>
 
-        <section className="mt-6 rounded-[2rem] border border-ink/10 bg-tile p-6 shadow-tile sm:p-7">
-          <div className="grid items-center gap-6 lg:grid-cols-2">
+        <section id="experience" className="scroll-mt-20 border-b border-line py-20">
+          <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-ink/50">Inside a step</p>
-              <h2 className="mt-2 font-display text-3xl font-bold">Read it, hear it, tap it.</h2>
-              <p className="mt-3 text-ink/70">
-                Each screen shows the assembly exactly as it should look, the pieces to grab, and tappable pins that
-                explain where every brick seats. A warm voice reads the whole step aloud for kids who can't read yet.
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">Inside a step</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">
+                One instruction at a time, read aloud.
+              </h2>
+              <p className="mt-5 leading-relaxed text-slate">
+                Each screen presents the assembly exactly as it should appear, the parts required for that step, and
+                tappable placement markers describing where every brick seats. Narration reads the full instruction
+                aloud for children who cannot yet read.
               </p>
-              <div className="mt-4 rounded-2xl border border-butter bg-butter/20 p-4">
-                <p className="text-sm font-extrabold text-ink/70">Parts you need</p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-tile px-3 py-1.5 text-sm font-bold">
-                    🛞 Wheel rim
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-coral text-[11px] text-cream">2</span>
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-tile px-3 py-1.5 text-sm font-bold">
-                    ⭕ Tire
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-coral text-[11px] text-cream">2</span>
-                  </span>
-                </div>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <span className="inline-flex min-h-[52px] items-center rounded-2xl border border-ink/10 bg-ink px-6 font-display font-bold text-cream">
-                  Next step
-                </span>
-                <span className="inline-flex min-h-[52px] items-center rounded-2xl border-2 border-coral/40 bg-tile px-6 font-display font-bold text-coral">
-                  I'm stuck, help!
-                </span>
-              </div>
+              <dl className="mt-8 divide-y divide-line border-y border-line">
+                {[
+                  ["Parts required", "Wheel rim ×2, Tire ×2"],
+                  ["Placement markers", "Tappable, with plain-language hints"],
+                  ["Narration", "English and Spanish, cached locally"],
+                  ["Recovery", "A help action revisits the previous state"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex flex-wrap justify-between gap-2 py-3">
+                    <dt className="text-sm font-semibold">{k}</dt>
+                    <dd className="text-sm text-slate">{v}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-            <div className="relative overflow-hidden rounded-2xl bg-cream">
+            <div className="overflow-hidden rounded-lg border border-line bg-tile shadow-tile">
               <img
-                src={miloImg}
-                alt="Step illustration showing the rover assembly with the newest pieces attached"
+                src={racecarImg}
+                alt="Step illustration showing a race car assembly with the newest pieces attached"
                 loading="lazy"
                 width={768}
                 height={768}
                 className="aspect-[4/3] w-full object-cover"
               />
-              <span className="absolute left-4 top-4 grid h-8 w-8 place-items-center rounded-full bg-coral text-cream shadow-md">
-                📍
-              </span>
             </div>
           </div>
         </section>
 
-        <section id="ai" className="mt-6 scroll-mt-6 rounded-[2rem] border border-ink/10 bg-tile p-6 shadow-tile sm:p-7">
-          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-ink/50">The AI Creative Instructor</p>
-          <h2 className="mt-2 max-w-2xl font-display text-3xl font-bold">
-            A child types an idea. It can only answer with real bricks.
+        <section id="ai" className="scroll-mt-20 border-b border-line py-20">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">AI Creative Instructor</p>
+          <h2 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight">
+            A child describes an idea. The system may only answer with real bricks.
           </h2>
-          <p className="mt-3 max-w-2xl text-ink/70">
-            "A red race car." "A dinosaur." KitConnect generates a brand-new 8–12 step build, then validates every
-            single part before a child sees it. If an idea can't be built from the box, it says so instead of guessing.
+          <p className="mt-5 max-w-2xl leading-relaxed text-slate">
+            Given a prompt such as “a red race car,” KitConnect generates an original 8–12 step build and validates it
+            before display. If an idea cannot be constructed from the kit, the app says so rather than improvising.
           </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-12 grid gap-px bg-line md:grid-cols-3">
             {guarantees.map((g, i) => (
-              <div key={g.title} className="rounded-2xl border border-ink/10 bg-cream p-5">
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-coral font-display text-sm font-bold text-cream">
-                  {i + 1}
-                </span>
-                <h3 className="mt-3 font-display text-lg font-bold leading-snug">{g.title}</h3>
-                <p className="mt-2 text-sm text-ink/65">{g.body}</p>
+              <div key={g.title} className="bg-cream p-6 md:p-8">
+                <p className="font-display text-sm font-semibold text-accent-blue">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-4 font-display text-lg font-semibold leading-snug">{g.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate">{g.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {access.map((a) => (
-            <div key={a.title} className="rounded-[1.6rem] border border-ink/10 bg-tile p-5 shadow-tile-sm">
-              <h3 className="font-display text-lg font-bold leading-snug">{a.title}</h3>
-              <p className="mt-2 text-sm text-ink/65">{a.body}</p>
-            </div>
-          ))}
-        </section>
-
-        <section className="mt-6 rounded-[2rem] border border-ink/10 bg-tile p-8 text-center shadow-tile">
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold sm:text-4xl">
-            Built so a curious kid never has to wait for help.
+        <section id="access" className="scroll-mt-20 border-b border-line py-20">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">Access and accessibility</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">
+            Built for the conditions students actually have.
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-ink/70">
-            KitConnect was made for children from low-income and migrant families who share a single tablet and often
-            build alone. Free, bilingual, and fully offline.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
-              href="#models"
-              className="inline-flex min-h-[56px] items-center rounded-2xl border border-ink/10 bg-coral px-7 font-display text-lg font-bold text-cream shadow-chunky transition-transform active:scale-[0.98]"
-            >
-              Explore the builds
-            </a>
+          <div className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+            {capabilities.map((c) => (
+              <div key={c.title} className="border-t border-line pt-5">
+                <h3 className="font-display text-base font-semibold">{c.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">{c.body}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 pb-4 text-sm font-semibold text-ink/50">
-          <p>KitConnect · made for curious builders · works offline on any tablet</p>
+        <section className="py-20">
+          <div className="rounded-lg border border-line bg-tile px-8 py-14 text-center shadow-tile">
+            <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold tracking-tight">
+              No child should have to wait for help to keep building.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl leading-relaxed text-slate">
+              KitConnect was built for children in low-income and migrant families who share a single tablet and often
+              build alone. It is free, bilingual and fully offline.
+            </p>
+            <a
+              href="#models"
+              className="mt-8 inline-flex h-11 items-center rounded-md bg-ink px-6 text-sm font-semibold text-cream transition-colors hover:bg-accent-blue"
+            >
+              View the build library
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-line">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-8 text-sm text-slate">
+          <p>KitConnect · Bilingual, offline STEM building for ages 6–10</p>
           <p>Congressional App Challenge 2026</p>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 }
