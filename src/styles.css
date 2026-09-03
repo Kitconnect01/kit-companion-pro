@@ -19,20 +19,17 @@
  */
 
 @theme inline {
-  --font-display: "Fredoka", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-body);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
-  --color-butter: var(--butter);
-  --color-coral: var(--coral);
-  --color-leaf: var(--leaf);
-  --color-sky: var(--sky);
-  --color-blush: var(--blush);
+  --color-slate: var(--slate);
+  --color-line: var(--line);
+  --color-accent-blue: var(--accent-blue);
   --color-tile: var(--tile);
-  --shadow-tile: 0 14px 0 color-mix(in oklab, var(--ink) 8%, transparent);
-  --shadow-tile-sm: 0 10px 0 color-mix(in oklab, var(--ink) 7%, transparent);
-  --shadow-chunky: 0 6px 0 color-mix(in oklab, var(--ink) 22%, transparent);
+  --shadow-tile: 0 1px 2px color-mix(in oklab, var(--ink) 6%, transparent), 0 12px 32px -18px color-mix(in oklab, var(--ink) 40%, transparent);
+  --shadow-tile-sm: 0 1px 2px color-mix(in oklab, var(--ink) 5%, transparent);
   --animate-float: float 5s ease-in-out infinite;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
